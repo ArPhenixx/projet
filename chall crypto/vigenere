@@ -1,0 +1,31 @@
+def vigenere_decode(text, key):
+    """
+    Décoder un texte chiffré avec le chiffrement de Vigenère.
+
+    :param text: Le texte chiffré
+    :param key: La clé utilisée pour le chiffrement
+    """
+    alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+    text = text.upper()
+    key = key.upper()
+    decoded_text = ''
+
+    key_index = 0
+    for char in text:
+        if char in alphabet:
+            text_index = alphabet.index(char)
+            shift = alphabet.index(key[key_index])
+            decoded_char = alphabet[(text_index - shift) % len(alphabet)]
+            decoded_text += decoded_char
+
+            # Passer au caractère suivant de la clé
+            key_index = (key_index + 1) % len(key)
+        else:
+            decoded_text += char  # Conserver les caractères non alphabétiques
+
+    return decoded_text
+
+# Exemple d'utilisation
+text_chiffre = "LXFOPVEFRNHR"
+key = "LEMON"
+print(vigenere_decode(text_chiffre, key))
